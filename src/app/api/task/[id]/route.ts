@@ -1,6 +1,16 @@
 import { TaskController } from "@/controllers/task.controller";
-import { connectDB } from "@/lib/connectDB";
+import { NextRequest } from "next/server";
 
-await connectDB();
-export const PATCH = TaskController.updateTaskName;
-export const DELETE = TaskController.deleteTask;
+export async function PATCH(
+  req: NextRequest,
+  ctx: { params: Promise<{ id: string }> }
+) {
+  return TaskController.updateTaskName(req, ctx);
+}
+
+export async function DELETE(
+  req: NextRequest,
+  ctx: { params: Promise<{ id: string }> }
+) {
+  return TaskController.deleteTask(req, ctx);
+}

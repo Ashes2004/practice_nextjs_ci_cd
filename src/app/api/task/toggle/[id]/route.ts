@@ -1,5 +1,9 @@
 import { TaskController } from "@/controllers/task.controller";
-import { connectDB } from "@/lib/connectDB";
+import { NextRequest } from "next/server";
 
-await connectDB();
-export const PATCH = TaskController.toggleTask;
+export async function PATCH(
+  req: NextRequest,
+  ctx: { params: Promise<{ id: string }> }
+) {
+  return TaskController.toggleTask(req, ctx);
+}
