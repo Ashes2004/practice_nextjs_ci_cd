@@ -7,7 +7,7 @@ if (!MONGODB_URI) {
   throw new AppError("Invalid DB url", 400);
 }
 
-// ✅ initialize once
+
 if (!global.mongoose) {
   global.mongoose = {
     conn: null,

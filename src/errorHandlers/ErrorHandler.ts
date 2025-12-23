@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { AppError } from "./AppError";
 
-export function ErrorHandler(error: any) {
+export function ErrorHandler(error: unknown) {
   if (error instanceof AppError) {
     return NextResponse.json(
       {
