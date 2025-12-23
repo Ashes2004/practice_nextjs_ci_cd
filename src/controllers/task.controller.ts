@@ -55,10 +55,10 @@ export class TaskController {
 
 
   //UPDATE TASK NAME
-  static async updateTaskName(req: Request ,  context: { params: { id: string }})
+  static async updateTaskName(req: Request ,  context: { params: Promise<{ id: string }> })
   {
     try {
-        const { id } = context.params;
+        const { id } = await context.params;
 
       if (!id) {
         throw new AppError("Task id is required", 400);
@@ -80,10 +80,10 @@ export class TaskController {
   // DELETE TASK
   static async deleteTask(
     _req: Request,
-    context: { params: { id: string } }
+    context: { params:  Promise<{ id: string }> }
   ) {
     try {
-      const { id } = context.params;
+      const { id } = await context.params;
 
       if (!id) {
         throw new AppError("Task id is required", 400);
