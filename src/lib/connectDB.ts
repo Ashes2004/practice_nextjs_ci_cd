@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-import { AppError } from "../errorHandlers/AppError";
+import mongoose, { Mongoose } from "mongoose";
 
 if (!global.mongoose) {
   global.mongoose = {
@@ -10,12 +9,13 @@ if (!global.mongoose) {
 
 const cached = global.mongoose;
 
-export async function connectDB() {
+export async function connectDB(): Promise<Mongoose | null> {
   const MONGODB_URI = process.env.MONGODB_URI;
 
   if (!MONGODB_URI) {
-    throw new AppError("Invalid DB url", 500);
+    return null;
   }
+
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
